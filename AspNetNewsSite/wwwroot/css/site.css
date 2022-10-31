@@ -75,6 +75,10 @@ body {
     height: 100px;
 }
 .img-bottom-right {
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 250px;
+}
+.img-bottom {
+    width: 190px;
+    height: 130px;
 }

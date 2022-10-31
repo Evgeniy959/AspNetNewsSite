@@ -23,6 +23,11 @@ namespace AspNetNewsSite.Controllers
             return View();
         }
 
+        public IActionResult Elephant()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
