@@ -18,7 +18,7 @@ File: Featured Slider CSS
 
 .gallery{color:#000; background:#EFEFEF; padding:15px;}
 
-.loader{background:url("../scripts/galleryviewthemes/loader.gif") center center no-repeat;}
+.loader{background:url("~/scripts/galleryviewthemes/loader.gif") center center no-repeat;}
 
 .panel .panel-overlay, .panel .overlay-background{height:60px; padding:10px;}
 .panel .overlay-background{background:#222;}
