@@ -1,5 +1,7 @@
+using AspNetNewsSite.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +25,13 @@ namespace AspNetNewsSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddDbContext<BlogDbContext>(options =>
+            {
+                //  options.UseSqlServer(builder.Configuration["ConnectionStrings:SqlServer"]);
+                //options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings")["SqlServer"]);
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +57,8 @@ namespace AspNetNewsSite
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            //NewsSiteDbInitializer.Seed(app);
+
         }
     }
 }

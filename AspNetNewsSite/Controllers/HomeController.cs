@@ -27,6 +27,22 @@ namespace AspNetNewsSite.Controllers
         {
             return View();
         }
+        public IActionResult Technology()
+        {
+            return View();
+        }
+        public IActionResult Entertainment()
+        {
+            return View();
+        }
+        public IActionResult Politics()
+        {
+            return View();
+        }
+        public IActionResult Environment()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
