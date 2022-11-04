@@ -39,6 +39,8 @@ namespace AspNetNewsSite.Controllers
         //  [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendEmail(Person person)
         {
+            blogDbContext.Persons.AddAsync(person);
+            await blogDbContext.SaveChangesAsync();
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append($"<h2>Поздравляем {person.Name} Вы подписаны на наши новости!</h2>");
             await emailSender.SendEmailAsync(person.Email, "Подписка на новости NewsSite", stringBuilder.ToString());
