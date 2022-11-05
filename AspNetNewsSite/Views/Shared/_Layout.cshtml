@@ -88,19 +88,19 @@
             <div id="newsletter">
                 <h2>NewsLetter Sign Up !</h2>
                 <p>Please enter your Email and Name to join.</p>
-                <form asp-action="SendEmail" asp-controller="Post" method="post">
+                <form asp-action="Subscribe" asp-controller="Post" method="post">
                     <fieldset>
                         <legend>Digital Newsletter</legend>
                         <div class="fl_left">
                             <input required name="Name" type="text" value="Enter name here…" onfocus="this.value=(this.value=='Enter name here…')? '' : this.value ;">
-                            <input required name="Email"  type="text" value="Enter email address…" onfocus="this.value=(this.value=='Enter email address…')? '' : this.value ;">
+                            <input required name="Email" type="text" value="Enter email address…" onfocus="this.value=(this.value=='Enter email address…')? '' : this.value ;">
                         </div>
                         <div class="fl_right">
                             <input type="submit" name="newsletter_go" id="newsletter_go" value="»">
                         </div>
                     </fieldset>
                 </form>
-                <p>To unsubsribe please <a href="#">click here »</a>.</p>
+                <p>To unsubsribe please <a asp-action="Unsubsribe" asp-controller="Post">click here »</a>.</p>
             </div>
             <br class="clear">
         </div>

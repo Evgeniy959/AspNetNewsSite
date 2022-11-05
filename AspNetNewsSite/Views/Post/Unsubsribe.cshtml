@@ -1,0 +1,27 @@
+﻿@model Person
+@{
+    ViewData["Title"] = "Unsubsribe";
+}
+
+<br class="clear">
+<div>
+    <h1 class="display-4">Хотите отписаться от рассылки?</h1>
+</div>
+<h4>Тогда просто введите адрес вашей электронной почты</h4>
+
+<form asp-controller="Post" asp-action="Unsubsribe" method="post" class="input-group mb-3">
+    <input required name="Email" type="text" class="form-control" aria-describedby="button-addon2">
+    @*<input type="hidden" asp-for="Id" />
+        <input required asp-for="Email" class="form-control">
+           <input required name="Id" type="hidden" class="form-control" placeholder="Enter email address…" aria-describedby="button-addon2">
+               <div class="form-group">
+                       <input required asp-for="Email" class="form-control" placeholder="Enter email address…" />
+                       <span class="text-danger" asp-validation-for="Email"></span>
+                   </div>*@
+    <button class="btn btn-primary" type="submit" id="button-addon2">Отписаться</button>
+</form>
+        @section Scripts{
+
+            <partial name="_ValidationScriptsPartial"></partial>
+
+        }

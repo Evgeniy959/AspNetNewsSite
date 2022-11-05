@@ -30,14 +30,14 @@ namespace AspNetNewsSite.Controllers
         }
 
         [HttpGet]
-        /*public IActionResult Index()
+        public IActionResult Show()
         {
-            return View(blogDbContext.Posts.Include(x => x.Category).ToList());
-        }*/
+            return View();
+        }
 
         [HttpPost]
         //  [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SendEmail(Person person)
+        public async Task<IActionResult> Subscribe(Person person)
         {
             blogDbContext.Persons.AddAsync(person);
             await blogDbContext.SaveChangesAsync();
@@ -46,5 +46,34 @@ namespace AspNetNewsSite.Controllers
             await emailSender.SendEmailAsync(person.Email, "Подписка на новости NewsSite", stringBuilder.ToString());
             return View(person);
         }
+        
+        [HttpGet]
+        public IActionResult Unsubsribe()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Unsubsribe(Person person, string Email)
+        {
+            //person.Name = "ser";
+            person = blogDbContext.Persons.Where(x => x.Email == Email).FirstOrDefault();
+            //Person person1 = person.;
+            Console.WriteLine(person.Id);
+            person = blogDbContext.Persons.Find(person.Id);
+            if (person != null)
+            {
+                blogDbContext.Persons.Remove(person);
+                //db.SaveChanges();
+                await blogDbContext.SaveChangesAsync();
+            }
+            //return RedirectToAction("Index");
+            //return View(person);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($"<h2>Вы отписаны от наших новостей!</h2>");
+            await emailSender.SendEmailAsync(Email, "Подписка на новости NewsSite", stringBuilder.ToString());
+            return View("Show");
+        }
+        
     }
 }
