@@ -39,14 +39,19 @@ namespace AspNetNewsSite.Controllers
         //  [ValidateAntiForgeryToken]
         public async Task<IActionResult> Subscribe(Person person)
         {
-            blogDbContext.Persons.AddAsync(person);
-            await blogDbContext.SaveChangesAsync();
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append($"<h2>Поздравляем {person.Name} Вы подписаны на наши новости!</h2>");
-            await emailSender.SendEmailAsync(person.Email, "Подписка на новости NewsSite", stringBuilder.ToString());
-            return View(person);
+            Person person1 = blogDbContext.Persons.Where(x => x.Email == person.Email).FirstOrDefault();            
+            if (person1 == null)
+            {
+                blogDbContext.Persons.AddAsync(person);
+                await blogDbContext.SaveChangesAsync();
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append($"<h2>Поздравляем {person.Name} Вы подписаны на наши новости!</h2>");
+                await emailSender.SendEmailAsync(person.Email, "Подписка на новости NewsSite", stringBuilder.ToString());
+                return View(person);
+            }
+            return View("Show");
         }
-        
+
         [HttpGet]
         public IActionResult Unsubsribe()
         {
@@ -54,26 +59,20 @@ namespace AspNetNewsSite.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Unsubsribe(Person person, string Email)
+        public async Task<IActionResult> Unsubsribe(Person person)
         {
-            //person.Name = "ser";
-            person = blogDbContext.Persons.Where(x => x.Email == Email).FirstOrDefault();
-            //Person person1 = person.;
-            Console.WriteLine(person.Id);
-            person = blogDbContext.Persons.Find(person.Id);
+            person = blogDbContext.Persons.Where(x => x.Email == person.Email).FirstOrDefault();
             if (person != null)
             {
+                person = blogDbContext.Persons.Find(person.Id);
                 blogDbContext.Persons.Remove(person);
-                //db.SaveChanges();
                 await blogDbContext.SaveChangesAsync();
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append($"<h2>Вы отписаны от наших новостей!</h2>");
+                await emailSender.SendEmailAsync(person.Email, "Подписка на новости NewsSite", stringBuilder.ToString());
+                return View("Show");
             }
-            //return RedirectToAction("Index");
-            //return View(person);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append($"<h2>Вы отписаны от наших новостей!</h2>");
-            await emailSender.SendEmailAsync(Email, "Подписка на новости NewsSite", stringBuilder.ToString());
-            return View("Show");
-        }
-        
+            return View();            
+        }        
     }
 }
