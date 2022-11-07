@@ -30,17 +30,23 @@ namespace AspNetNewsSite.Controllers
         }
 
         [HttpGet]
-        public IActionResult Show()
+        public IActionResult ShowUnsubsribe()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult ShowSubscribe(Person person)
+        {
+            return View(person);
         }
 
         [HttpPost]
         //  [ValidateAntiForgeryToken]
         public async Task<IActionResult> Subscribe(Person person)
         {
-            Person person1 = blogDbContext.Persons.Where(x => x.Email == person.Email).FirstOrDefault();            
-            if (person1 == null)
+            Person personContains = blogDbContext.Persons.Where(x => x.Email == person.Email).FirstOrDefault();            
+            if (personContains == null)
             {
                 blogDbContext.Persons.AddAsync(person);
                 await blogDbContext.SaveChangesAsync();
@@ -49,7 +55,7 @@ namespace AspNetNewsSite.Controllers
                 await emailSender.SendEmailAsync(person.Email, "Подписка на новости NewsSite", stringBuilder.ToString());
                 return View(person);
             }
-            return View("Show");
+            return View("ShowSubscribe", person);
         }
 
         [HttpGet]
@@ -70,7 +76,7 @@ namespace AspNetNewsSite.Controllers
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append($"<h2>Вы отписаны от наших новостей!</h2>");
                 await emailSender.SendEmailAsync(person.Email, "Подписка на новости NewsSite", stringBuilder.ToString());
-                return View("Show");
+                return View("ShowUnsubsribe");
             }
             return View();            
         }        
