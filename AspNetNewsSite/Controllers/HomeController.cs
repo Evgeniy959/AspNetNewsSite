@@ -11,11 +11,13 @@ namespace AspNetNewsSite.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly BlogDbContext blogDbContext;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BlogDbContext blogDbContext)
         {
             _logger = logger;
+            this.blogDbContext = blogDbContext;
         }
 
         public IActionResult Index()
@@ -41,7 +43,23 @@ namespace AspNetNewsSite.Controllers
         }
         public IActionResult Environment()
         {
-            return View();
+            return View(blogDbContext.Сomments.ToList());
+        }
+
+        /*[HttpGet]
+        public IActionResult AddComment()
+        {
+            return View("Environment", blogDbContext.Сomments.ToList());
+        }*/
+
+        [HttpPost]
+        public async Task<IActionResult> AddComment(Сomment comment)
+        {
+            comment.Date = DateTime.Now;
+            blogDbContext.Сomments.AddAsync(comment);
+            await blogDbContext.SaveChangesAsync();
+            return RedirectToAction("Environment");
+            //return View();
         }
 
         public IActionResult Privacy()

@@ -20,15 +20,8 @@ namespace AspNetNewsSite.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-            //ModelState.AddModelError("Title", "99999");
-            /*ViewBag.Categories = new SelectList(blogDbContext.Categories, "Id", "Name"); 
-            ViewBag.Tags = new MultiSelectList(blogDbContext.Tags, "Id", "Name");*/ 
-            return View();
-        }
-
+        
+       
         [HttpGet]
         public IActionResult ShowUnsubsribe()
         {
@@ -67,10 +60,11 @@ namespace AspNetNewsSite.Controllers
         [HttpPost]
         public async Task<IActionResult> Unsubsribe(Person person)
         {
-            person = blogDbContext.Persons.Where(x => x.Email == person.Email).FirstOrDefault();
+            //person = blogDbContext.Persons.Where(x => x.Email == person.Email).FirstOrDefault();
+            person = blogDbContext.Persons.FirstOrDefault(x => x.Email == person.Email);
             if (person != null)
             {
-                person = blogDbContext.Persons.Find(person.Id);
+                //person = blogDbContext.Persons.Find(person.Id);
                 blogDbContext.Persons.Remove(person);
                 await blogDbContext.SaveChangesAsync();
                 StringBuilder stringBuilder = new StringBuilder();

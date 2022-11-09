@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Сomment>
 @{
     ViewData["Title"] = "Environment";
 }
@@ -20,4 +20,39 @@
     <p>В ведомстве пояснили, что разработанная система сама формирует документы и отправляет информацию в нужные ведомства. После этого на проверку выезжает инспектор. Фото с места инцидента инспектор загружает в специальное приложение.</p>
     <p>Ранее Минцифры России объявило о создании до конца года единой облачной платформы. На ней, как уточняется, заказчики смогут получать облачные решения без торгов.</p>
 </h5>
-
+<br class="clear">
+<div id="comments">
+    <h4>Comments</h4>
+    @foreach (var item in @Model)
+    {
+        <ul class="commentlist">
+            <li class="comment_odd">
+                <div class="author"><img class="avatar" src="~/images/demo/avatar.gif" width="32" height="32" alt="" /><span class="name"><a href="#">@item.Name</a></span> <span class="wrote">wrote:</span></div>
+                <div class="submitdate"><a href="#">@item.Date</a></div>
+                <p>@item.Content</p>
+            </li>
+        </ul>
+    }
+</div>
+<h4>Write A Comment</h4>
+<div id="respond">
+    <form asp-action="AddComment" asp-controller="Home" method="post">
+        <p>
+            <input type="text" required name="Name" id="name" size="22" />
+            <label for="Name"><small>Name (required)</small></label>
+        </p>
+        <p>
+            <input type="text" required name="Email" id="email" size="22" />
+            <label for="Email"><small>Mail (required)</small></label>
+        </p>
+        <p>
+            <textarea name="Content" id="comment" rows="10"></textarea>
+            <label for="Content" style="display:none;"><small>Comment (required)</small></label>
+        </p>
+        <p>
+            <input name="submit" type="submit" id="submit" value="Submit Form" />
+            &nbsp;
+            <input name="reset" type="reset" id="reset" tabindex="5" value="Reset Form" />
+        </p>
+    </form>
+</div>
