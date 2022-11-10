@@ -25,10 +25,22 @@ namespace AspNetNewsSite.Controllers
             return View();
         }
 
+        public IActionResult NewsEcology()
+        {
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "NewsEcology").ToList());
+        }
+
+        public IActionResult GoodNews()
+        {
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "GoodNews").ToList());
+        }
+
+
         public IActionResult Elephant()
         {
             return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Elephant").ToList());
         }
+        
         public IActionResult Technology()
         {
             return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Technology").ToList());
