@@ -25,6 +25,16 @@ namespace AspNetNewsSite.Controllers
             return View();
         }
 
+        public IActionResult NewsWorld()
+        {
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "NewsWorld").ToList());
+        }
+
+        public IActionResult NewsInteresting()
+        {
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "NewsInteresting").ToList());
+        }
+
         public IActionResult NewsEcology()
         {
             return View(blogDbContext.Сomments.Where(x => x.PostTitle == "NewsEcology").ToList());

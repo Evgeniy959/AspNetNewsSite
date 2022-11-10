@@ -19,9 +19,6 @@ namespace AspNetNewsSite.Controllers
             this.emailSender = emailSender;
         }
 
-
-        
-       
         [HttpGet]
         public IActionResult ShowUnsubsribe()
         {
