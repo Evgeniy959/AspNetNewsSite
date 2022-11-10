@@ -27,23 +27,24 @@ namespace AspNetNewsSite.Controllers
 
         public IActionResult Elephant()
         {
-            return View();
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Elephant").ToList());
         }
         public IActionResult Technology()
         {
-            return View();
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Technology").ToList());
         }
         public IActionResult Entertainment()
         {
-            return View();
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Entertainment").ToList());
         }
         public IActionResult Politics()
         {
-            return View();
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Politics").ToList());
         }
         public IActionResult Environment()
         {
-            return View(blogDbContext.Сomments.ToList());
+            //return View(blogDbContext.Сomments.ToList());
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Environment").ToList());
         }
 
         /*[HttpGet]
@@ -58,8 +59,8 @@ namespace AspNetNewsSite.Controllers
             comment.Date = DateTime.Now;
             blogDbContext.Сomments.AddAsync(comment);
             await blogDbContext.SaveChangesAsync();
-            return RedirectToAction("Environment");
-            //return View();
+            //return RedirectToAction("Environment");
+            return View("Index");
         }
 
         public IActionResult Privacy()

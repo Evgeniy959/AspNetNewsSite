@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Сomment>
 @{
     ViewData["Title"] = "Entertainment";
 }
@@ -19,25 +19,4 @@
     Для самых маленьких организовали спортивную зону, где дети перетягивают канаты, играют в подвижные игры и поднимают большую, но легкую штангу. В творческом уголке дети рисовали и участвовали в мастер-классах по изготовлению поделок.
 </h5>
 <br class="clear">
-<h4>Write A Comment</h4>
-<div id="respond">
-    <form action="#" method="post">
-        <p>
-            <input type="text" name="name" id="name" value="" size="22" />
-            <label for="name"><small>Name (required)</small></label>
-        </p>
-        <p>
-            <input type="text" name="email" id="email" value="" size="22" />
-            <label for="email"><small>Mail (required)</small></label>
-        </p>
-        <p>
-            <textarea name="comment" id="comment" cols="100%" rows="10"></textarea>
-            <label for="comment" style="display:none;"><small>Comment (required)</small></label>
-        </p>
-        <p>
-            <input name="submit" type="submit" id="submit" value="Submit Form" />
-            &nbsp;
-            <input name="reset" type="reset" id="reset" tabindex="5" value="Reset Form" />
-        </p>
-    </form>
-</div>
+<partial name="_CommentCardPartial" model="@Model"></partial>

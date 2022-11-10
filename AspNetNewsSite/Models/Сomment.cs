@@ -19,6 +19,9 @@ namespace AspNetNewsSite.Models
         [MaxLength(1000)]
         public string Content { get; set; }
         public DateTime Date { get; set; }
+        [Required]
+        [MaxLength(255)]
+        public string PostTitle { get; set; }
 
     }
 }
