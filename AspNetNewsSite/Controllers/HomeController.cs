@@ -45,12 +45,21 @@ namespace AspNetNewsSite.Controllers
             return View(blogDbContext.Сomments.Where(x => x.PostTitle == "GoodNews").ToList());
         }
 
-
-        public IActionResult Elephant()
+        public IActionResult Sport()
         {
-            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Elephant").ToList());
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Sport").ToList());
         }
-        
+
+        public IActionResult Journeys()
+        {
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Journeys").ToList());
+        }
+
+        public IActionResult Games()
+        {
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Games").ToList());
+        }
+
         public IActionResult Technology()
         {
             return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Technology").ToList());
@@ -67,6 +76,21 @@ namespace AspNetNewsSite.Controllers
         {
             //return View(blogDbContext.Сomments.ToList());
             return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Environment").ToList());
+        }
+
+        public IActionResult OnlyGoodleft()
+        {
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "OnlyGoodleft").ToList());
+        }
+
+        public IActionResult OnlyGoodCentre()
+        {
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "OnlyGoodCentre").ToList());
+        }
+        
+        public IActionResult OnlyGoodRight()
+        {
+            return View(blogDbContext.Сomments.Where(x => x.PostTitle == "OnlyGoodRight").ToList());
         }
 
         /*[HttpGet]
