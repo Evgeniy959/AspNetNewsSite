@@ -74,7 +74,6 @@ namespace AspNetNewsSite.Controllers
         }
         public IActionResult Environment()
         {
-            //return View(blogDbContext.Сomments.ToList());
             return View(blogDbContext.Сomments.Where(x => x.PostTitle == "Environment").ToList());
         }
 
@@ -93,19 +92,12 @@ namespace AspNetNewsSite.Controllers
             return View(blogDbContext.Сomments.Where(x => x.PostTitle == "OnlyGoodRight").ToList());
         }
 
-        /*[HttpGet]
-        public IActionResult AddComment()
-        {
-            return View("Environment", blogDbContext.Сomments.ToList());
-        }*/
-
         [HttpPost]
         public async Task<IActionResult> AddComment(Сomment comment)
         {
             comment.Date = DateTime.Now;
             blogDbContext.Сomments.AddAsync(comment);
             await blogDbContext.SaveChangesAsync();
-            //return RedirectToAction("Environment");
             return View("Index");
         }
 

@@ -32,7 +32,6 @@ namespace AspNetNewsSite.Controllers
         }
 
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
         public async Task<IActionResult> Subscribe(Person person)
         {
             Person personContains = blogDbContext.Persons.Where(x => x.Email == person.Email).FirstOrDefault();            
